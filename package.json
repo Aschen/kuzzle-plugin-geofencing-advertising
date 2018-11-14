@@ -26,10 +26,12 @@
   "devDependencies": {
     "cucumber": "^5.0.1",
     "eslint": "^5.6.0",
-    "kuzzle-sdk": "^5.0.13",
+    "kuzzle-sdk": "git://github.com/kuzzleio/sdk-javascript.git#6-dev",
     "nexpect": "^0.5.0"
   },
   "dependencies": {
+    "benchmark": "^2.1.4",
+    "geojson-random": "^0.4.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"
   }
