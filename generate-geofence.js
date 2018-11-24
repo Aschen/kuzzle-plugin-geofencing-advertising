@@ -4,7 +4,10 @@ const
 
 const kuzzle = new Kuzzle('websocket', { host: '51.15.139.200', port: 7512 });
 
-const generatePolygon = () => georandom.polygon(1).features[0].geometry.coordinates[0].map(c => [c[1], c[0]])
+const generatePolygon = () => georandom.polygon(1, 6).features[0].geometry.coordinates[0].map(c => [c[1], c[0]])
+
+console.log(generatePolygon())
+process.exit(1)
 
 const run = async () => {
   try {
@@ -38,4 +41,3 @@ const run = async () => {
 }
 
 run()
-
