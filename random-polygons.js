@@ -57,6 +57,6 @@ function polygonsToGeojson(polygons, filename) {
   fs.writeFileSync(filename, JSON.stringify(geojson))
 }
 
-const polygons = generatePolygons(240000, usaBbox)
+const polygons = generatePolygons(20000, usaBbox)
 
 polygonsToGeojson(polygons, './polygons.json')

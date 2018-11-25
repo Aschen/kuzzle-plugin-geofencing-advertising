@@ -12,6 +12,12 @@ A request to the API allows to know if given GPS coordinates are contained in on
 
 Requests to the API are authenticated.
 
+### About polygons
+
+![10k polygon](images/10000_polygons_usa.png)
+
+![polygon size](images/polygon_size.png)
+
 
 ## Controller Actions
 
