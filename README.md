@@ -1,78 +1,82 @@
-# kuzzle-core-plugin-boilerplate
+# Kuzzle Geofencing Marketing
 
-Here, you'll find the boilerplate to start coding a new [Kuzzle Core Plugin](http://docs.kuzzle.io/guide/essentials/plugins/). A Core Plugin allows you to
+The purpose of this project is to demonstrate the feasibility and performance of a realtime geofencing marketing backend.
 
-* [listen asynchronously](http://docs.kuzzle.io/plugins-reference/plugins-features/adding-hooks), and perform operations that depend on data-related events;
-* [listen synchronously](http://docs.kuzzle.io/plugins-reference/plugins-features/adding-pipes), and approve, modify and/or reject data-related queries;
-* [add a controller route](http://docs.kuzzle.io/plugins-reference/plugins-features/adding-controllers) to expose new actions to the API;
-* [add an authentication strategy](http://docs.kuzzle.io/plugins-reference/plugins-features/adding-authentication-strategy) to Kuzzle.
+## Specifications
 
-The boilerplate demonstrates each feature of a Core Plugin.
+Polygons with 6 sides the size of a few blocks are recorded in a rectangle representing approximately America.
+Each polygon is linked to a document stored by Kuzzle in Redis.
+A request to the API allows to know if given GPS coordinates are contained in one of the polygons. If this is the case, then the saved document corresponding to the polygon is returned by Kuzzle.
+Requests to the API are authenticated.
 
-## Plugin development
 
-This plugin is useful only if you use it as the starting point of your work. It's a boilerplate.
+## Actions
 
-### On an existing Kuzzle
+### geofence/register
 
-Clone this repository locally and make it accessible from the `plugins/enabled` directory relative to the Kuzzle installation directory. A common practice is to put the code of the plugin in `plugins/available` and create a symbolic link to it in `plugins/enabled`.
+Randomly generate polygons and register them in geofencing filters.
 
-**Note.** If you are running Kuzzle from within a Docker container, you will need to mount the local plugin installation directory as a volume in the container.
+Parameters:
+  - `count`: number of polygons to register
+  - `bounding_box`: area where to generate polygons
 
-Please refer to the Guide for further instructions on [how to install Kuzzle plugins](https://docs.kuzzle.io/guide/essentials/plugins/#managing-plugins).
+Use http://geojson.io to have bounding box coordinates.
+ - create a rectangle
+ - go to "Meta" menu
+ - click "add bounding box"
 
-### On a pristine Kuzzle stack
+Example:
+ - USA bounding box  `[ -127.96875, 26.745610382199022, -66.4453125, 51.6180165487737]`
 
-You can use the `docker-compose.yml` file included in this repository to start a development-oriented stack to help you creating your custom Kuzzle Core plugin.
+ Use the script `actions/geofence-register.js` to register 10 000 polygons in the USA.
 
-Clone this repository locally and type:
+ ### geofence/test
 
+ Test if GPS coordinates are included in one of the registered polygons and return the corresponding documents.
+
+ Parameters:
+  - `lat`: latitude
+  - `lng`: longitude
+
+Example:
 ```bash
-$ docker-compose -f docker/docker-compose.yml up
+curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhc2NoZW4iLCJpYXQiOjE1NDMxMDUzMDQsImV4cCI6MTU0MzEwODkwNH0.WnUCDCwPXRUA1JE_4e7kbkIShQiM0MtW0admTWpKI1g" "http://localhost:7512/_plugin/geofencing-marketing/geofence/test?lat=-86.99962414458622&lng=31.431421096655942
 ```
 
-This command will start a Kuzzle stack with this plugin enabled. To make development more confortable, a watcher will also be activated, restarting Kuzzle every time a modification is detected.
+### geofence/geojson
 
-**Note:** depending on your operating system, you may get `ENOSPC` errors due to the file watcher. This is due to a `sysctl` restriction, and can be alleviated by applying the following command prior to starting the docker stack:
+Get the polygons list in GeoJSON format.
 
-```bash
-$ sudo sysctl -w fs.inotify.max_user_watches=52428
-```
+Execute the script `action/get-geojson.js` to create a `polygons.json` file containing the polygons.
 
-#### Working on a different Kuzzle tag
+Use https://www.gmapgis.com/ to load the generated file in a world map.
 
-You can choose to work on the Kuzzle development branch by defining the following environment variables before launching `docker-compose`:
+## Benchmarks
 
-```bash
-$ export KUZZLE_DOCKER_TAG=1.4.2
-$ docker-compose -f docker/docker-compose.yml up
-```
+### Standalone Kuzzle stack on single node
 
-These environment variables enable you to specify any existing build tag available on [Docker Hub](https://hub.docker.com/r/kuzzleio/kuzzle/tags/).
+This benchmark is realised with a standalone Kuzzle stack on a Scaleway [C2L server](https://www.scaleway.com/pricing/#anchor_baremetal).
+Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network
 
+### Benchmark context
 
-#### Customizing the plugin instance name
+Number of 6 faces polygons: 300 000
+Zone: USA
+Kuzzle authentication: yes
+Document storage: Redis
+Protocol: Websocket
 
-You may want to choose a plugin name rather than using the default one. To do so, edit the `manifest.json` file at the root of this repo and change the `name` property to your convenience.
+The test consists in repeating the same request 2000 times with a point matching 1 polygon.
 
+The benchmarks is realised with [bombardier](https://github.com/codesenberg/bombardier/releases) on a Scaleway [C2S server](https://www.scaleway.com/pricing/#anchor_baremetal).
+Server specifications: 4 dedicated CPU cores, 8GB RAM, SSD, 300Mb/s network
 
-## `manifest.json` file
-
-The `manifest.json` file is here to provide a description of your plugin to Kuzzle:
-
-```js
-{
-  /**
-   * This is metadata to describe your plugin
-   */
-  "name": "name-of-your-plugin",
-
-  /**
-   * Define what Kuzzle version this plugin is designed for.
-   * Use semver notation to limit the range of supported Kuzzle versions.
-   * If not set, Kuzzle will complain and consider that the plugin has been 
-   * designed for Kuzzle v1 only.
-   */
-  "kuzzleVersion": ">=1.1.0 <2.0.0"
-}
-```
+| concurrent connections | avg latency (ms) | request/s |
+| ------------ | ------- | --------- |
+| 1 | 2.74 | 363 |
+| 2 | 4.51 | 442 |
+| 3 | 5.57 | 538 |
+| 4 | 6.96 | 575 |
+| 5 | 9.17 | 546 |
+| 10 | 15.27 | 654 |
+| 20 | 43.01 | 467 |

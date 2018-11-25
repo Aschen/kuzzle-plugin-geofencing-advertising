@@ -1,8 +1,8 @@
 {
-  "name": "kuzzle-core-plugin-boilerplate",
-  "author": "The Kuzzle Team <support@kuzzle.io>",
-  "version": "1.1.1",
-  "description": "Kuzzle plugin boilerplate template",
+  "name": "geofencing-marketing",
+  "author": "Aschen <adrien@maret.email>",
+  "version": "1.0.0",
+  "description": "Kuzzle plugin geofencing marketing",
   "main": "lib/index.js",
   "scripts": {
     "test": "npm run --silent lint && npm run functional-testing",
@@ -30,7 +30,6 @@
     "nexpect": "^0.5.0"
   },
   "dependencies": {
-    "benchmark": "^2.1.4",
     "geojson-random": "^0.4.0",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0"

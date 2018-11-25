@@ -14,7 +14,7 @@ const run = async () => {
     await kuzzle.auth.login('local', { username: 'aschen', password: 'aschen' })
 
     const query = {
-      controller: 'kuzzle-core-plugin-boilerplate/geofence',
+      controller: 'geofencing-marketing/geofence',
       action: 'geojson'
     };
 

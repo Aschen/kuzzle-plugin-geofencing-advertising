@@ -31,7 +31,7 @@ const run = async () => {
       const [lat, lng] = point.geometry.coordinates;
 
       const query = {
-        controller: 'kuzzle-core-plugin-boilerplate/geofence',
+        controller: 'geofencing-marketing/geofence',
         action: 'test',
         lat,
         lng
@@ -40,8 +40,8 @@ const run = async () => {
       return kuzzle.query(query).then(response => {
         if (response.result.length > 0) {
           console.log(`${lat} ${lng} match ${response.result.length} documents`);
-          console.log(`curl -H "Authorization: Bearer ${jwt}" "http://${host}:7512/_plugin/kuzzle-core-plugin-boilerplate/geofence/test?lat=${lat}&lng=${lng}&pretty"`);
-          console.log(`bombardier -c 1 -n 1000 -H "Authorization: Bearer ${jwt}" "http://${host}:7512/_plugin/kuzzle-core-plugin-boilerplate/geofence/test?lat=${lat}&lng=${lng}&pretty"`);
+          console.log(`curl -H "Authorization: Bearer ${jwt}" "http://${host}:7512/_plugin/geofencing-marketing/geofence/test?lat=${lat}&lng=${lng}&pretty"`);
+          console.log(`bombardier -c 1 -n 1000 -H "Authorization: Bearer ${jwt}" "http://${host}:7512/_plugin/geofencing-marketing/geofence/test?lat=${lat}&lng=${lng}&pretty"`);
           console.log('');
         }
       });

@@ -9,7 +9,7 @@ const usaBbox = [
 ]
 
 const host = process.argv[2] || 'localhost'
-const count = parseInt(process.argv[3]) || 1000
+const count = parseInt(process.argv[3]) || 10000
 const bounding_box = (() => {
   if (process.argv[4] === 'usa') {
     return usaBbox
@@ -27,7 +27,7 @@ const run = async () => {
     await kuzzle.auth.login('local', { username: 'aschen', password: 'aschen' })
 
     const query = {
-      controller: 'kuzzle-core-plugin-boilerplate/geofence',
+      controller: 'geofencing-marketing/geofence',
       action: 'register',
       count,
       bounding_box
