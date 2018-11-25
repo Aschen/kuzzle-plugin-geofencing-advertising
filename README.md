@@ -100,7 +100,7 @@ Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network
 - Document storage: `Redis`
 - Protocol: `Websocket`
 
-The test consists in repeating the same request 20000 times with a point matching 1 polygon.
+The test consists in repeating the same request 2000 times with a point matching 1 polygon.
 
 The benchmark is realized with a [custom websocket node.js client](benchmarks/node-client/geofence-test.js) based on the [javascript SDK 6](https://github.com/kuzzleio/sdk-javascript/tree/6-beta).
 
@@ -108,3 +108,10 @@ Server specifications: 4 dedicated CPU cores, 8GB RAM, SSD, 300Mb/s network
 
 | concurrent connections | avg latency (ms) | request/s |
 | ------------ | ------- | --------- |
+| 1 | ... | 1023 |
+| 2 | ... | 600 |
+| 3 | ... | 619 |
+| 4 | ... | 605 |
+| 5 | ... | 600 |
+| 10 | ... | 584 |
+| 20 | ... | 531 |

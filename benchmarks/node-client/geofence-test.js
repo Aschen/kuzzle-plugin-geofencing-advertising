@@ -74,6 +74,10 @@ class Client {
 
     this.kuzzle.disconnect();
   }
+
+  error () {
+    return this.success !== this.requests;
+  }
 }
 
 
@@ -100,7 +104,11 @@ const run = async () => {
   console.log(`Sent ${requests} requests in ${measure.duration} ms`)
   console.log(`Approx ${requestPerSecond} requests/sec`);
   console.log(`Latency:  avg ${averageLatency}`);
-
+  clients.forEach(client => {
+    if (client.error()) {
+      console.log(`Error: fail ${client.fail} success ${client.success} needed ${client.requests}`)
+    }
+  })
 }
 
 run()
