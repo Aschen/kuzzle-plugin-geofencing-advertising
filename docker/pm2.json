@@ -2,9 +2,13 @@
   "apps": [{
     "name": "KuzzleServer",
     "script": "bin/kuzzle",
-    "args": ["start"],
+    "args": ["start", "--securities", "/var/app/securities.json"],
     "node_args": "--inspect=0.0.0.0:9229",
-    "watch": ["plugins/enabled"],
-    "ignore_watch" : ["node_modules", "plugins/enabled/**/.git", "plugins/enabled/**/features/*"]
+    "watch": ["plugins/enabled/kuzzle-core-plugin-boilerplate/lib/**/*"],
+    "ignore_watch" : [
+      "node_modules",
+      "plugins/enabled/**/.git",
+      "plugins/enabled/**/features/*"
+    ]
   }]
 }

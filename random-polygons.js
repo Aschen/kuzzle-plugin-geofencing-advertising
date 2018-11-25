@@ -10,6 +10,9 @@ const usaBbox = [
 ]
 
 function generatePolygons(count, bounding_box) {
+  // Use http://geojson.io to have a bounding box coordinates
+  // Create a rectangle then go to Meta => Add bounding box
+
   return georandom.point(count, bounding_box).features.map(point => {
     return randomPolygon(point.geometry.coordinates, 10)
   });
@@ -30,6 +33,8 @@ function randomPolygon(center, size_coef) {
 }
 
 function polygonsToGeojson(polygons, filename) {
+  // Use https://www.gmapgis.com/ to load the generated file
+
   const features = polygons.map(polygon => {
     return {
       "type": "Feature",
@@ -52,6 +57,6 @@ function polygonsToGeojson(polygons, filename) {
   fs.writeFileSync(filename, JSON.stringify(geojson))
 }
 
-const polygons = generatePolygons(10000, usaBbox)
+const polygons = generatePolygons(240000, usaBbox)
 
 polygonsToGeojson(polygons, './polygons.json')
