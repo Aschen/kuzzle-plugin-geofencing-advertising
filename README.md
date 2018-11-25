@@ -56,7 +56,37 @@ Use https://www.gmapgis.com/ to load the generated file in a world map.
 
 ## Benchmarks
 
-### Standalone Kuzzle stack on single node
+### Standalone Kuzzle stack on single node with HTTP
+
+This benchmark is realised with a standalone Kuzzle stack on a Scaleway [C2L server](https://www.scaleway.com/pricing/#anchor_baremetal).
+
+Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network
+
+### Benchmark context
+
+- Number of 6 faces polygons: `300 000`
+- Zone: `USA`
+- Kuzzle authentication: `yes`
+- Document storage: `Redis`
+- Protocol: `HTTP`
+
+The test consists in repeating the same request 2000 times with a point matching 1 polygon.
+
+The benchmark is realised with [bombardier](https://github.com/codesenberg/bombardier/releases) on a Scaleway [C2S server](https://www.scaleway.com/pricing/#anchor_baremetal).
+
+Server specifications: 4 dedicated CPU cores, 8GB RAM, SSD, 300Mb/s network
+
+| concurrent connections | avg latency (ms) | request/s |
+| ------------ | ------- | --------- |
+| 1 | 2.74 | 363 |
+| 2 | 4.51 | 442 |
+| 3 | 5.57 | 538 |
+| 4 | 6.96 | 575 |
+| 5 | 9.17 | 546 |
+| 10 | 15.27 | 654 |
+| 20 | 43.01 | 467 |
+
+### Standalone Kuzzle stack on single node with Websocket
 
 This benchmark is realised with a standalone Kuzzle stack on a Scaleway [C2L server](https://www.scaleway.com/pricing/#anchor_baremetal).
 
@@ -70,18 +100,11 @@ Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network
 - Document storage: `Redis`
 - Protocol: `Websocket`
 
-The test consists in repeating the same request 2000 times with a point matching 1 polygon.
+The test consists in repeating the same request 20000 times with a point matching 1 polygon.
 
-The benchmarks is realised with [bombardier](https://github.com/codesenberg/bombardier/releases) on a Scaleway [C2S server](https://www.scaleway.com/pricing/#anchor_baremetal).
+The benchmark is realized with a [custom websocket node.js client](benchmarks/node-client/geofence-test.js) based on the [javascript SDK 6](https://github.com/kuzzleio/sdk-javascript/tree/6-beta).
 
 Server specifications: 4 dedicated CPU cores, 8GB RAM, SSD, 300Mb/s network
 
 | concurrent connections | avg latency (ms) | request/s |
 | ------------ | ------- | --------- |
-| 1 | 2.74 | 363 |
-| 2 | 4.51 | 442 |
-| 3 | 5.57 | 538 |
-| 4 | 6.96 | 575 |
-| 5 | 9.17 | 546 |
-| 10 | 15.27 | 654 |
-| 20 | 43.01 | 467 |
