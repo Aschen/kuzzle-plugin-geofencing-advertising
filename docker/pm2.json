@@ -4,7 +4,10 @@
     "script": "bin/kuzzle",
     "args": ["start", "--securities", "/var/app/securities.json"],
     "node_args": "--inspect=0.0.0.0:9229",
-    "watch": ["plugins/enabled/kuzzle-core-plugin-boilerplate/lib/**/*"],
+    "watch": [
+      "plugins/enabled/kuzzle-core-plugin-boilerplate/lib/**/*",
+      "protocols/enabled/geolight-protocol/**/*"
+    ],
     "ignore_watch" : [
       "node_modules",
       "plugins/enabled/**/.git",

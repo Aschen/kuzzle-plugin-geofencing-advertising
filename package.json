@@ -30,8 +30,10 @@
     "nexpect": "^0.5.0"
   },
   "dependencies": {
+    "buffer-serializer": "^1.1.0",
     "geojson-random": "^0.4.0",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "pson": "^2.0.0"
   }
 }

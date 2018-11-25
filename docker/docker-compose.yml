@@ -10,6 +10,7 @@ services:
       - "./install-plugins.sh:/install-plugins.sh"
       - "./pm2.json:/config/pm2.json"
       - "..:/var/app/plugins/enabled/${PLUGIN_NAME:-kuzzle-core-plugin-boilerplate}"
+      - "../geolight-protocol:/var/app/protocols/enabled/geolight-protocol"
     cap_add:
       - SYS_PTRACE
     ulimits:
@@ -22,11 +23,12 @@ services:
     ports:
       - "9229:9229"
       - "7512:7512"
+      - "4242:4242"
     environment:
       - kuzzle_services__db__client__host=http://elasticsearch:9200
       - kuzzle_services__internalCache__node__host=redis
       - kuzzle_services__memoryStorage__node__host=redis
-      - NODE_ENV=production
+      - NODE_ENV=development
 #      - DEBUG=kuzzle:plugins
 
   redis:

@@ -28,7 +28,7 @@ Use http://geojson.io to have bounding box coordinates.
  - go to "Meta" menu
  - click "add bounding box"
 
-Example:
+Bounding boxes:
  - USA bounding box  `[ -127.96875, 26.745610382199022, -66.4453125, 51.6180165487737]`
 
  Use the script `actions/geofence-register.js` to register 10 000 polygons in the USA.
@@ -59,6 +59,7 @@ Use https://www.gmapgis.com/ to load the generated file in a world map.
 ### Standalone Kuzzle stack on single node
 
 This benchmark is realised with a standalone Kuzzle stack on a Scaleway [C2L server](https://www.scaleway.com/pricing/#anchor_baremetal).
+
 Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network
 
 ### Benchmark context
