@@ -5,8 +5,11 @@ The purpose of this project is to demonstrate the feasibility and performance of
 ## Specifications
 
 Polygons with 6 sides the size of a few blocks are recorded in a rectangle representing approximately America.
+
 Each polygon is linked to a document stored by Kuzzle in Redis.
+
 A request to the API allows to know if given GPS coordinates are contained in one of the polygons. If this is the case, then the saved document corresponding to the polygon is returned by Kuzzle.
+
 Requests to the API are authenticated.
 
 
@@ -60,15 +63,16 @@ Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network
 
 ### Benchmark context
 
-Number of 6 faces polygons: 300 000
-Zone: USA
-Kuzzle authentication: yes
-Document storage: Redis
-Protocol: Websocket
+- Number of 6 faces polygons: `300 000`
+- Zone: `USA`
+- Kuzzle authentication: `yes`
+- Document storage: `Redis`
+- Protocol: `Websocket`
 
 The test consists in repeating the same request 2000 times with a point matching 1 polygon.
 
 The benchmarks is realised with [bombardier](https://github.com/codesenberg/bombardier/releases) on a Scaleway [C2S server](https://www.scaleway.com/pricing/#anchor_baremetal).
+
 Server specifications: 4 dedicated CPU cores, 8GB RAM, SSD, 300Mb/s network
 
 | concurrent connections | avg latency (ms) | request/s |
