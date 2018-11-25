@@ -10,9 +10,9 @@ const usaBbox = [
 ]
 
 const host = process.argv[2] || 'localhost'
-const count = parseInt(process.argv[3]) || 100
+const count = 100
 const bounding_box = (() => {
-  if (process.argv[4] === 'usa') {
+  if (process.argv[3] === 'usa') {
     return usaBbox
   } else {
     return usaBbox
@@ -42,6 +42,7 @@ const run = async () => {
           console.log(`${lat} ${lng} match ${response.result.length} documents`);
           console.log(`curl -H "Authorization: Bearer ${jwt}" "http://${host}:7512/_plugin/geofencing-marketing/geofence/test?lat=${lat}&lng=${lng}&pretty"`);
           console.log(`bombardier -c 1 -n 1000 -H "Authorization: Bearer ${jwt}" "http://${host}:7512/_plugin/geofencing-marketing/geofence/test?lat=${lat}&lng=${lng}&pretty"`);
+          console.log(`node benchmarks/node-client/geofence-test.js ${lat} ${lng} 1 2000 ${host}`);
           console.log('');
         }
       });

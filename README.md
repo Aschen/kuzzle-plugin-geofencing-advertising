@@ -13,7 +13,7 @@ A request to the API allows to know if given GPS coordinates are contained in on
 Requests to the API are authenticated.
 
 
-## Actions
+## Controller Actions
 
 ### geofence/register
 
@@ -53,6 +53,56 @@ Get the polygons list in GeoJSON format.
 Execute the script `action/get-geojson.js` to create a `polygons.json` file containing the polygons.
 
 Use https://www.gmapgis.com/ to load the generated file in a world map.
+
+## Tools
+
+### geofence-register
+
+This script send a request to register polygons filters.
+
+```
+Usage: node actions/geofence-register.js <host> <filter count> <bounding box>
+```
+
+The availables bounding boxes are: `usa`
+
+Example: register 100 000 polygons filters in USA
+```
+node actions/geofence-register.js localhost 100000 usa
+```
+
+### geofence-find-match
+
+This script return random points that match at least one polygon.
+
+It also print curl, bombardier and custom node benchmark command for each point.
+
+
+```
+Usage: node actions/geofence-find-match.js <host> <bounding box>
+```
+
+The availables bounding boxes are: `usa`
+
+Example:
+```
+node actions/geofence-find-match.js localhost usa
+```
+
+### get-geojson
+
+This script get the registered polygons in GeoJSON format.
+
+The generated file can be viewed online on https://www.gmapgis.com/, just drag'n'drop the file.
+
+```
+Usage: node actions/get-geojson.js <host> <filename>
+```
+
+Example:
+```
+node actions/get-geojson.js localhost ./polygons.json
+```
 
 ## Benchmarks
 

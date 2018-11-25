@@ -97,6 +97,7 @@ const run = async () => {
   }));
   performance.mark('end')
   performance.measure('duration', 'start', 'end');
+
   const measure = performance.getEntriesByName('duration')[0];
   const requestPerSecond = requests / measure.duration * 1000
   const averageLatency = clients.reduce((sum, client) => sum + client.latency, 0) / clients.length
