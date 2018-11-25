@@ -1,0 +1,28 @@
+{
+  "roles": {
+    "anonymous": {
+      "controllers": {
+        "auth": {
+          "actions": {
+            "login": true,
+            "checkToken": true,
+            "getCurrentUser": true
+          }
+        }
+      }
+    }
+  },
+  "users": {
+      "aschen": {
+          "content": {
+              "profileIds": ["admin"]
+          },
+          "credentials": {
+              "local": {
+                  "username": "aschen",
+                  "password": "aschen"
+              }
+          }
+      }
+  }
+}
