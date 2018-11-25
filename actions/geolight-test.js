@@ -15,6 +15,10 @@ class GeolightClient extends EventEmitter {
     this.packetCount = 0;
   }
 
+  onData (data) {
+    const packet = JSON.parse(buffer.toString())
+  }
+
   sendPacket (packet) {
 
   }

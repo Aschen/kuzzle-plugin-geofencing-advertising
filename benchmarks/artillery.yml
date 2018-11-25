@@ -1,0 +1,19 @@
+  config:
+    target: "wss://echo.websocket.org"
+    phases:
+      - duration: 20
+        arrivalRate: 10
+    ws:
+      # Ignore SSL certificate errors
+      # - useful in *development* with self-signed certs
+      rejectUnauthorized: false
+
+  scenarios:
+    - engine: "ws"
+      flow:
+        - send:
+            controller: geofencing-marketing/geofence
+            action: test
+            lat: -102.81807137884635
+            lng: 41.22485900000915
+            jwt: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhc2NoZW4iLCJpYXQiOjE1NDMxNjczODcsImV4cCI6MTU0MzE3MDk4N30.PHPuZl5u7LIkjEsQ8QDWVuIKM6Y61fpNUrIrpYRMheQ
