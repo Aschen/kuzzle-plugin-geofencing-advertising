@@ -4,7 +4,7 @@ require "json"
 
 message = JSON.build do |json|
   json.object do
-    json.field "controller", "geofencing-marketing/geofence"
+    json.field "controller", "geofencing-advertising/geofence"
     json.field "action", "test"
     json.field "lat", ARGV[0]
     json.field "lng", ARGV[1]

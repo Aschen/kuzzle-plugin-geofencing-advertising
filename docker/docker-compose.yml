@@ -9,7 +9,7 @@ services:
       - "../bootstrap/securities.json:/var/app/securities.json"
       - "./install-plugins.sh:/install-plugins.sh"
       - "./pm2.json:/config/pm2.json"
-      - "..:/var/app/plugins/enabled/geofencing-marketing"
+      - "..:/var/app/plugins/enabled/geofencing-advertising"
       - "../geolight-protocol:/var/app/protocols/enabled/geolight-protocol"
     cap_add:
       - SYS_PTRACE

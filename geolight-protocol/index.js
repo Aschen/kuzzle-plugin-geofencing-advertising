@@ -99,7 +99,7 @@ class GeolightProtocol {
       connection = this.connections.get(socket),
       jwt = this.jwts.get(socket),
       request = new this.context.Request({
-        controller: 'geofencing-marketing/geofence',
+        controller: 'geofencing-advertising/geofence',
         action: 'test',
         jwt,
         lat,

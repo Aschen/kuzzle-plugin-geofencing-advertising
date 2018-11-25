@@ -1,6 +1,6 @@
-# Kuzzle Geofencing Marketing
+# Kuzzle Geofencing Advertising
 
-The purpose of this project is to demonstrate the feasibility and performance of a realtime geofencing marketing backend.
+The purpose of this project is to demonstrate the feasibility and performance of a realtime geofencing advertising backend.
 
 ## Specifications
 
@@ -49,7 +49,7 @@ Bounding boxes:
 
 Example:
 ```bash
-curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhc2NoZW4iLCJpYXQiOjE1NDMxMDUzMDQsImV4cCI6MTU0MzEwODkwNH0.WnUCDCwPXRUA1JE_4e7kbkIShQiM0MtW0admTWpKI1g" "http://localhost:7512/_plugin/geofencing-marketing/geofence/test?lat=-86.99962414458622&lng=31.431421096655942
+curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhc2NoZW4iLCJpYXQiOjE1NDMxMDUzMDQsImV4cCI6MTU0MzEwODkwNH0.WnUCDCwPXRUA1JE_4e7kbkIShQiM0MtW0admTWpKI1g" "http://localhost:7512/_plugin/geofencing-advertising/geofence/test?lat=-86.99962414458622&lng=31.431421096655942
 ```
 
 ### geofence/geojson

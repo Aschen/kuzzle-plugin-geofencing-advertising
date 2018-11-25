@@ -5,7 +5,7 @@
     "args": ["start", "--securities", "/var/app/securities.json"],
     "node_args": "--inspect=0.0.0.0:9229",
     "watch": [
-      "plugins/enabled/geofencing-marketing/lib/**/*",
+      "plugins/enabled/geofencing-advertising/lib/**/*",
       "protocols/enabled/geolight-protocol/**/*"
     ],
     "ignore_watch" : [

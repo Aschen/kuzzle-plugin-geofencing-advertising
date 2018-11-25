@@ -16,7 +16,7 @@ class Client {
     this.kuzzle = new Kuzzle('websocket', { host, port: 7512 });
 
     this.query = {
-      controller: 'geofencing-marketing/geofence',
+      controller: 'geofencing-advertising/geofence',
       action: 'test',
       lat,
       lng

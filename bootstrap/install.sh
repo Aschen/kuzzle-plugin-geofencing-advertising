@@ -28,9 +28,9 @@ wget https://github.com/codesenberg/bombardier/releases/download/v1.2/bombardier
 
 chmod +x bombardier-linux-amd64
 
-git clone https://github.com/Aschen/kuzzle-plugin-geofencing-marketing.git
+git clone https://github.com/Aschen/kuzzle-plugin-geofencing-advertising.git
 
-cd kuzzle-plugin-geofencing-marketing
+cd kuzzle-plugin-geofencing-advertising
 
 sysctl -w vm.max_map_count=262144
 sysctl -w fs.inotify.max_user_watches=52428

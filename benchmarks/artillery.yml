@@ -12,7 +12,7 @@
     - engine: "ws"
       flow:
         - send:
-            controller: geofencing-marketing/geofence
+            controller: geofencing-advertising/geofence
             action: test
             lat: -102.81807137884635
             lng: 41.22485900000915

@@ -27,7 +27,7 @@ const run = async () => {
     await kuzzle.auth.login('local', { username: 'aschen', password: 'aschen' })
 
     const query = {
-      controller: 'geofencing-marketing/geofence',
+      controller: 'geofencing-advertising/geofence',
       action: 'register',
       count,
       bounding_box
