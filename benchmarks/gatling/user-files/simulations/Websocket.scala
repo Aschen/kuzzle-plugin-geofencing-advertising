@@ -21,13 +21,16 @@ import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
 class Websocket extends Simulation {
+  val host = String.getString("host", "localhost")
+  val lat = Float.getFloat("lat", 10.0)
+  val lng = Float.getFloat("lng", 10.0)
 
   val httpProtocol = http
-    .baseUrl("http://localhost:7512")
+    .baseUrl("http://" + host + ":7512")
     .acceptHeader("text/html,application/json,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8")
     .acceptEncodingHeader("gzip, deflate")
     .userAgentHeader("Gatling2")
-    .wsBaseUrl("ws://localhost:7512")
+    .wsBaseUrl("ws://" + host + ":7512")
 
 
   val scn = scenario("WebSocket")
@@ -41,7 +44,7 @@ class Websocket extends Simulation {
     )
     .repeat(2000, "i") {
       exec(ws("Geofence test")
-        .sendText("""{"controller": "geofencing-advertising/geofence", "action": "test", "lat": -106.48854631967743, "lng": 29.50976747342886 }""")
+        .sendText("""{"controller": "geofencing-advertising/geofence", "action": "test", "lat":""" + lat + """, "lng": """ + lng + """ }""")
         .await(1 seconds)(
           ws.checkTextMessage("checkPolygon").check(regex(".*polygon.*"))
         )
