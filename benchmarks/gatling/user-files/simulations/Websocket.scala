@@ -24,7 +24,7 @@ class Websocket extends Simulation {
   val host = System.getProperty("host", "localhost")
   val lat = System.getProperty("lat", "10.0").toFloat
   val lng = System.getProperty("lng", "10.0").toFloat
-  val requests = System.getProperty("requests", "1").toInt
+  val requests = System.getProperty("requests", "2000").toInt
   val users = System.getProperty("users", "1").toInt
 
   val httpProtocol = http

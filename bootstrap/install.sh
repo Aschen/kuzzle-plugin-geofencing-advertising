@@ -6,6 +6,7 @@ apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
+    ruby \
     software-properties-common \
     git
 

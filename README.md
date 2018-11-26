@@ -125,6 +125,7 @@ Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network
 - Kuzzle authentication: `yes`
 - Document storage: `Redis`
 - Protocol: `HTTP`
+- Node.js: `8.11.0`
 
 The test consists in repeating the same request 2000 times with a point matching 1 polygon.
 
@@ -142,6 +143,7 @@ Server specifications: 4 dedicated CPU cores, 8GB RAM, SSD, 300Mb/s network
 | 10 | 15.27 | 654 |
 | 20 | 43.01 | 467 |
 
+
 ### Standalone Kuzzle stack on single node with Websocket
 
 This benchmark is realised with a standalone Kuzzle stack on a Scaleway [C2L server](https://www.scaleway.com/pricing/#anchor_baremetal).
@@ -155,19 +157,26 @@ Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network
 - Kuzzle authentication: `yes`
 - Document storage: `Redis`
 - Protocol: `Websocket`
+- Node.js: `8.11.0`
 
 The test consists in repeating the same request 2000 times with a point matching 1 polygon.
 
-The benchmark is realized with a [custom websocket node.js client](benchmarks/node-client/geofence-test.js) based on the [javascript SDK 6](https://github.com/kuzzleio/sdk-javascript/tree/6-beta).
+The benchmark is realized with [Gatling](https://gatling.io) and a [websocket scenario](benchmarks/gatling/Websocket.scala) .
 
 Server specifications: 4 dedicated CPU cores, 8GB RAM, SSD, 300Mb/s network
 
-| concurrent connections | avg latency (ms) | request/s |
-| ------------ | ------- | --------- |
-| 1 | ... | 1023 |
-| 2 | ... | 600 |
-| 3 | ... | 619 |
-| 4 | ... | 605 |
-| 5 | ... | 600 |
-| 10 | ... | 584 |
-| 20 | ... | 531 |
+| concurrent connections | avg latency (ms) | avg request/s | max requests/s |
+| ------------ | ------- | ------- | ------- |
+| 1 | 3 | 222 | 388 |
+| 2 | 3 | 400 | 641 |
+| 3 | 4 | 546 | 757 |
+| 4 | 6 | 602 | 853 |
+| 5 | 6 | 667 | 980 |
+| 10 | 10 | 910 | 1231 |
+| 20 | 16 | 1144 | 1455 |
+
+### Progressive loading
+
+Same test but progressively load 120 users with 200 requests each.
+
+![progressive loading](images/gatling_progressive_benchmark.png)
