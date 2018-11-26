@@ -21,10 +21,11 @@ spawn do
     while count > 0
       time = Benchmark.realtime do
         client.send(message)
-        count -= 1
         channel.receive
       end
-    puts time
+
+      count -= 1
+      puts time
   end
 end
 
