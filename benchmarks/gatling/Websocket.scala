@@ -49,5 +49,7 @@ class Websocket extends Simulation {
     }
     .exec(ws("Close WS").close)
 
-  setUp(scn.inject(atOnceUsers(10)).protocols(httpProtocol))
+  setUp(scn.inject(
+    atOnceUsers(1)
+  ).protocols(httpProtocol))
 }
