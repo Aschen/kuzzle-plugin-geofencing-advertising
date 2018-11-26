@@ -21,9 +21,9 @@ import io.gatling.http.Predef._
 import scala.concurrent.duration._
 
 class Websocket extends Simulation {
-  val host = String.getString("host", "localhost")
-  val lat = Float.getFloat("lat", 10.0)
-  val lng = Float.getFloat("lng", 10.0)
+  val host = System.getProperty("host", "localhost")
+  val lat = System.getProperty("lat", "10.0").toFloat
+  val lng = System.getProperty("lng", "10.0").toFloat
 
   val httpProtocol = http
     .baseUrl("http://" + host + ":7512")

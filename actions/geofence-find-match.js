@@ -43,6 +43,7 @@ const run = async () => {
           console.log(`curl -H "Authorization: Bearer ${jwt}" "http://${host}:7512/_plugin/geofencing-advertising/geofence/test?lat=${lat}&lng=${lng}&pretty"`);
           console.log(`bombardier -c 1 -n 1000 -H "Authorization: Bearer ${jwt}" "http://${host}:7512/_plugin/geofencing-advertising/geofence/test?lat=${lat}&lng=${lng}&pretty"`);
           console.log(`node benchmarks/node-client/geofence-test.js ${lat} ${lng} 1 2000 ${host}`);
+          console.log(`JAVA_OPTS="-Dhost=${host} -Dlat=-${lat} -Dlng=${lng}" bash benchmarks/gatling/docker.sh`);
           console.log('');
         }
       });
