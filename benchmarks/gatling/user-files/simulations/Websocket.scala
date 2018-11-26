@@ -24,6 +24,8 @@ class Websocket extends Simulation {
   val host = System.getProperty("host", "localhost")
   val lat = System.getProperty("lat", "10.0").toFloat
   val lng = System.getProperty("lng", "10.0").toFloat
+  val requests = System.getProperty("requests", "1").toInt
+  val users = System.getProperty("users", "1").toInt
 
   val httpProtocol = http
     .baseUrl("http://" + host + ":7512")
@@ -42,7 +44,7 @@ class Websocket extends Simulation {
         ws.checkTextMessage("checkName").check(regex(".*jwt.*"))
       )
     )
-    .repeat(2000, "i") {
+    .repeat(requests, "i") {
       exec(ws("Geofence test")
         .sendText("""{"controller": "geofencing-advertising/geofence", "action": "test", "lat":""" + lat + """, "lng": """ + lng + """ }""")
         .await(1 seconds)(
@@ -53,6 +55,6 @@ class Websocket extends Simulation {
     .exec(ws("Close WS").close)
 
   setUp(scn.inject(
-    atOnceUsers(1)
+    atOnceUsers(users)
   ).protocols(httpProtocol))
 }
