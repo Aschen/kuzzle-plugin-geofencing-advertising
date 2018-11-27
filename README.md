@@ -29,6 +29,8 @@ Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network
 ### Benchmark context
 
 - Number of 6 faces polygons: `300 000`
+- Overlaping polygons: `true`
+- Accuracy: `<1m`
 - Zone: `USA`
 - Kuzzle authentication: `yes`
 - Document storage: `Redis`
@@ -69,6 +71,8 @@ Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network
 ### Benchmark context
 
 - Number of 6 faces polygons: `300 000`
+- Overlaping polygons: `true`
+- Accuracy: `<1m`
 - Zone: `USA`
 - Kuzzle authentication: `yes`
 - Document storage: `Redis`
