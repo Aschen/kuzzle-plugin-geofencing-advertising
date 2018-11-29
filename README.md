@@ -121,16 +121,16 @@ Gatling server is a [c5.2xlarge instance](https://aws.amazon.com/ec2/instance-ty
 Server specifications: 9 vCPU, 16 GB RAM
 
 The full benchmarks reports are here:
- - [2 nodes, 80 users in 40 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129155157651/index.html)
- - [2 nodes, 120 users in 12 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129155709939/index.html)
- - [2 nodes, 200 users in 20 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129155408633/index.html)
- - [3 nodes, 120 users in 12 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129160824325/index.html)
- - [3 nodes, 200 users in 20 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129160654693/index.html)
- - [3 nodes, 200 users in 10 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129161004854/index.html)
- - [4 nodes, 120 users in 12 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129162052379/index.html)
- - [4 nodes, 200 users in 20 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129162203432/index.html)
- - [4 nodes, 200 users in 10 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129162323195/index.html)
- - [4 nodes, 400 users in 20 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129163117542/index.html)
+ - [2 nodes, 80 users in 40 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129155157651/index.html)
+ - [2 nodes, 120 users in 12 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129155709939/index.html)
+ - [2 nodes, 200 users in 20 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129155408633/index.html)
+ - [3 nodes, 120 users in 12 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129160824325/index.html)
+ - [3 nodes, 200 users in 20 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129160654693/index.html)
+ - [3 nodes, 200 users in 10 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129161004854/index.html)
+ - [4 nodes, 120 users in 12 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129162052379/index.html)
+ - [4 nodes, 200 users in 20 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129162203432/index.html)
+ - [4 nodes, 200 users in 10 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129162323195/index.html)
+ - [4 nodes, 400 users in 20 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129163117542/index.html)
 
 
 ## Controller Actions
