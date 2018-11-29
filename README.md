@@ -95,6 +95,40 @@ Server specifications: 4 dedicated CPU cores, 8GB RAM, SSD, 300Mb/s network
 | 10 | 15.27 | 654 |
 | 20 | 43.01 | 467 |
 
+### Kuzzle cluster with Websocket
+
+This benchmark is realised with a Kuzzle cluster on AWS [m5.large instances](https://aws.amazon.com/ec2/instance-types/m5/).
+
+Server specifications: 2 vCPU, 8GB RAM
+
+### Benchmark context
+
+- Number of 6 faces polygons: `300 000`
+- Overlaping polygons: `true`
+- Accuracy: `<1m`
+- Zone: `USA`
+- Kuzzle authentication: `yes`
+- Document storage: `Redis`
+- Protocol: `Websocket`
+- Node.js: `8.11.0`
+
+The test consists in repeating the same request 2000 times with a point matching 1 polygon.
+
+The benchmark is realized with [Gatling](https://gatling.io) and a [websocket scenario](benchmarks/gatling/Websocket.scala) .
+
+The full benchmarks reports are here:
+ - [2 nodes, 80 users in 40 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129155157651/index.html)
+ - [2 nodes, 120 users in 12 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129155709939/index.html)
+ - [2 nodes, 200 users in 20 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129155408633/index.html)
+ - [3 nodes, 120 users in 12 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129160824325/index.html)
+ - [3 nodes, 200 users in 20 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129160654693/index.html)
+ - [3 nodes, 200 users in 10 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129161004854/index.html)
+ - [4 nodes, 120 users in 12 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129162052379/index.html)
+ - [4 nodes, 200 users in 20 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129162203432/index.html)
+ - [4 nodes, 200 users in 10 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129162323195/index.html)
+ - [4 nodes, 400 users in 20 seconds, 2000 requests each](benchmarks/gatling/results/websocket-20181129163117542/index.html)
+
+
 ## Controller Actions
 
 ### geofence/register

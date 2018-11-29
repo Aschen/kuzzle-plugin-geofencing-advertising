@@ -25,13 +25,13 @@ curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compo
 
 chmod +x /usr/local/bin/docker-compose
 
-wget https://github.com/codesenberg/bombardier/releases/download/v1.2/bombardier-linux-amd64
-
-chmod +x bombardier-linux-amd64
-
 git clone https://github.com/Aschen/kuzzle-plugin-geofencing-advertising.git
 
 cd kuzzle-plugin-geofencing-advertising
+
+wget https://github.com/codesenberg/bombardier/releases/download/v1.2/bombardier-linux-amd64
+
+chmod +x bombardier-linux-amd64
 
 sysctl -w vm.max_map_count=262144
 sysctl -w fs.inotify.max_user_watches=52428

@@ -1,0 +1,10 @@
+{
+  "simulation": "computerdatabase.Websocket",
+  "simulationId": "websocket",
+  "start": 1543509077542,
+  "description": "400 users in 20 sec, 2000req, 4 nodes",
+  "scenarios": ["WebSocket"],
+  "assertions": [
+
+  ]
+}

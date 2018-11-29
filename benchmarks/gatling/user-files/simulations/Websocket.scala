@@ -56,6 +56,6 @@ class Websocket extends Simulation {
     .exec(ws("Close WS").close)
 
   setUp(scn.inject(
-    constantUsersPerSec(users) during (duration seconds)
+    rampUsers(users) during (duration seconds)
   ).protocols(httpProtocol))
 }
