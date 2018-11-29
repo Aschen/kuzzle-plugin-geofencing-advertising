@@ -26,6 +26,7 @@ class Websocket extends Simulation {
   val lng = System.getProperty("lng", "10.0").toFloat
   val requests = System.getProperty("requests", "2000").toInt
   val users = System.getProperty("users", "1").toInt
+  val duration = System.getProperty("duration", "1").toInt
 
   val httpProtocol = http
     .baseUrl("http://" + host + ":7512")
@@ -55,6 +56,6 @@ class Websocket extends Simulation {
     .exec(ws("Close WS").close)
 
   setUp(scn.inject(
-    atOnceUsers(users)
+    constantUsersPerSec(users) during (duration seconds)
   ).protocols(httpProtocol))
 }
