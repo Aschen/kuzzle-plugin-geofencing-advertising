@@ -1,0 +1,239 @@
+<h1><a id="Kuzzle_Geofencing_Advertising_0"></a>Kuzzle Geofencing Advertising</h1>
+<p>The purpose of this project is to demonstrate the feasibility and performance of a realtime geofencing advertising backend.</p>
+<h2><a id="Specifications_4"></a>Specifications</h2>
+<p>Polygons with 6 sides the size of a few blocks are recorded in a rectangle representing approximately America.</p>
+<p>Each polygon is linked to a document stored by Kuzzle in Redis.</p>
+<p>A request to the API allows to know if given GPS coordinates are contained in one of the polygons. If this is the case, then the saved document corresponding to the polygon is returned by Kuzzle.</p>
+<p>Requests to the API are authenticated.</p>
+<h3><a id="About_polygons_14"></a>About polygons</h3>
+<p><img src="images/10000_polygons_usa.png" alt="10k polygon"></p>
+<p><img src="images/polygon_size.png" alt="polygon size"></p>
+<h2><a id="Benchmarks_20"></a>Benchmarks</h2>
+<h3><a id="Standalone_Kuzzle_stack_on_single_node_with_Websocket_22"></a>Standalone Kuzzle stack on single node with Websocket</h3>
+<p>This benchmark is realised with a standalone Kuzzle stack on a Scaleway <a href="https://www.scaleway.com/pricing/#anchor_baremetal">C2L server</a>.</p>
+<p>Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network</p>
+<h3><a id="Benchmark_context_28"></a>Benchmark context</h3>
+<ul>
+<li>Number of 6 faces polygons: <code>300 000</code></li>
+<li>Overlaping polygons: <code>true</code></li>
+<li>Accuracy: <code>&lt;1m</code></li>
+<li>Zone: <code>USA</code></li>
+<li>Kuzzle authentication: <code>yes</code></li>
+<li>Document storage: <code>Redis</code></li>
+<li>Protocol: <code>Websocket</code></li>
+<li>Node.js: <code>8.11.0</code></li>
+</ul>
+<p>The test consists in repeating the same request 2000 times with a point matching 1 polygon.</p>
+<p>The benchmark is realized with <a href="https://gatling.io">Gatling</a> and a <a href="benchmarks/gatling/Websocket.scala">websocket scenario</a> .</p>
+<p>Server specifications: 4 dedicated CPU cores, 8GB RAM, SSD, 300Mb/s network</p>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>concurrent connections</th>
+<th>avg latency (ms)</th>
+<th>avg request/s</th>
+<th>max requests/s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>3</td>
+<td>222</td>
+<td>388</td>
+</tr>
+<tr>
+<td>2</td>
+<td>3</td>
+<td>400</td>
+<td>641</td>
+</tr>
+<tr>
+<td>3</td>
+<td>4</td>
+<td>546</td>
+<td>757</td>
+</tr>
+<tr>
+<td>4</td>
+<td>6</td>
+<td>602</td>
+<td>853</td>
+</tr>
+<tr>
+<td>5</td>
+<td>6</td>
+<td>667</td>
+<td>980</td>
+</tr>
+<tr>
+<td>10</td>
+<td>10</td>
+<td>910</td>
+<td>1231</td>
+</tr>
+<tr>
+<td>20</td>
+<td>16</td>
+<td>1144</td>
+<td>1455</td>
+</tr>
+</tbody>
+</table>
+<h3><a id="Progressive_loading_55"></a>Progressive loading</h3>
+<p>Same test but progressively load 120 users with 200 requests each.</p>
+<p>The full benchmark report is available <a href="https://aschen.ovh/kuzzle_geofencing_progressive_benchmark">here</a></p>
+<p><img src="images/gatling_progressive_benchmark.png" alt="progressive loading"></p>
+<h3><a id="Standalone_Kuzzle_stack_on_single_node_with_HTTP_64"></a>Standalone Kuzzle stack on single node with HTTP</h3>
+<p>This benchmark is realised with a standalone Kuzzle stack on a Scaleway <a href="https://www.scaleway.com/pricing/#anchor_baremetal">C2L server</a>.</p>
+<p>Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network</p>
+<h3><a id="Benchmark_context_70"></a>Benchmark context</h3>
+<ul>
+<li>Number of 6 faces polygons: <code>300 000</code></li>
+<li>Overlaping polygons: <code>true</code></li>
+<li>Accuracy: <code>&lt;1m</code></li>
+<li>Zone: <code>USA</code></li>
+<li>Kuzzle authentication: <code>yes</code></li>
+<li>Document storage: <code>Redis</code></li>
+<li>Protocol: <code>HTTP</code></li>
+<li>Node.js: <code>8.11.0</code></li>
+</ul>
+<p>The test consists in repeating the same request 2000 times with a point matching 1 polygon.</p>
+<p>The benchmark is realised with <a href="https://github.com/codesenberg/bombardier/releases">bombardier</a> on a Scaleway <a href="https://www.scaleway.com/pricing/#anchor_baremetal">C2S server</a>.</p>
+<p>Server specifications: 4 dedicated CPU cores, 8GB RAM, SSD, 300Mb/s network</p>
+<table class="table table-striped table-bordered">
+<thead>
+<tr>
+<th>concurrent connections</th>
+<th>avg latency (ms)</th>
+<th>request/s</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>2.74</td>
+<td>363</td>
+</tr>
+<tr>
+<td>2</td>
+<td>4.51</td>
+<td>442</td>
+</tr>
+<tr>
+<td>3</td>
+<td>5.57</td>
+<td>538</td>
+</tr>
+<tr>
+<td>4</td>
+<td>6.96</td>
+<td>575</td>
+</tr>
+<tr>
+<td>5</td>
+<td>9.17</td>
+<td>546</td>
+</tr>
+<tr>
+<td>10</td>
+<td>15.27</td>
+<td>654</td>
+</tr>
+<tr>
+<td>20</td>
+<td>43.01</td>
+<td>467</td>
+</tr>
+</tbody>
+</table>
+<h3><a id="Kuzzle_cluster_with_Websocket_97"></a>Kuzzle cluster with Websocket</h3>
+<p>This benchmark is realised with a Kuzzle cluster on AWS <a href="https://aws.amazon.com/ec2/instance-types/m5/">m5.large instances</a>.</p>
+<p>Server specifications: 2 vCPU, 8GB RAM</p>
+<h3><a id="Benchmark_context_103"></a>Benchmark context</h3>
+<ul>
+<li>Number of 6 faces polygons: <code>300 000</code></li>
+<li>Overlaping polygons: <code>true</code></li>
+<li>Accuracy: <code>&lt;1m</code></li>
+<li>Zone: <code>USA</code></li>
+<li>Kuzzle authentication: <code>yes</code></li>
+<li>Document storage: <code>Redis</code></li>
+<li>Protocol: <code>Websocket</code></li>
+<li>Node.js: <code>8.11.0</code></li>
+</ul>
+<p>The test consists in repeating the same request 2000 times with a point matching 1 polygon.</p>
+<p>The benchmark is realized with <a href="https://gatling.io">Gatling</a> and a <a href="benchmarks/gatling/Websocket.scala">websocket scenario</a>.</p>
+<p>Gatling server is a <a href="https://aws.amazon.com/ec2/instance-types/c5/">c5.2xlarge instance</a>.</p>
+<p>Server specifications: 9 vCPU, 16 GB RAM</p>
+<p>The full benchmarks reports are here:</p>
+<ul>
+<li><a href="benchmarks/gatling/results/websocket-20181129155157651/index.html">2 nodes, 80 users in 40 seconds, 2000 requests each</a></li>
+<li><a href="benchmarks/gatling/results/websocket-20181129155709939/index.html">2 nodes, 120 users in 12 seconds, 2000 requests each</a></li>
+<li><a href="benchmarks/gatling/results/websocket-20181129155408633/index.html">2 nodes, 200 users in 20 seconds, 2000 requests each</a></li>
+<li><a href="benchmarks/gatling/results/websocket-20181129160824325/index.html">3 nodes, 120 users in 12 seconds, 2000 requests each</a></li>
+<li><a href="benchmarks/gatling/results/websocket-20181129160654693/index.html">3 nodes, 200 users in 20 seconds, 2000 requests each</a></li>
+<li><a href="benchmarks/gatling/results/websocket-20181129161004854/index.html">3 nodes, 200 users in 10 seconds, 2000 requests each</a></li>
+<li><a href="benchmarks/gatling/results/websocket-20181129162052379/index.html">4 nodes, 120 users in 12 seconds, 2000 requests each</a></li>
+<li><a href="benchmarks/gatling/results/websocket-20181129162203432/index.html">4 nodes, 200 users in 20 seconds, 2000 requests each</a></li>
+<li><a href="benchmarks/gatling/results/websocket-20181129162323195/index.html">4 nodes, 200 users in 10 seconds, 2000 requests each</a></li>
+<li><a href="benchmarks/gatling/results/websocket-20181129163117542/index.html">4 nodes, 400 users in 20 seconds, 2000 requests each</a></li>
+</ul>
+<h2><a id="Controller_Actions_135"></a>Controller Actions</h2>
+<h3><a id="geofenceregister_137"></a>geofence/register</h3>
+<p>Randomly generate polygons and register them in geofencing filters.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>count</code>: number of polygons to register</li>
+<li><code>bounding_box</code>: area where to generate polygons</li>
+</ul>
+<p>Use <a href="http://geojson.io">http://geojson.io</a> to have bounding box coordinates.</p>
+<ul>
+<li>create a rectangle</li>
+<li>go to “Meta” menu</li>
+<li>click “add bounding box”</li>
+</ul>
+<p>Bounding boxes:</p>
+<ul>
+<li>USA bounding box  <code>[ -127.96875, 26.745610382199022, -66.4453125, 51.6180165487737]</code></li>
+</ul>
+<p>Use the script <code>actions/geofence-register.js</code> to register 10 000 polygons in the USA.</p>
+<h3><a id="geofencetest_155"></a>geofence/test</h3>
+<p>Test if GPS coordinates are included in one of the registered polygons and return the corresponding documents.</p>
+<p>Parameters:</p>
+<ul>
+<li><code>lat</code>: latitude</li>
+<li><code>lng</code>: longitude</li>
+</ul>
+<p>Example:</p>
+<pre><code class="language-bash">curl -H <span class="hljs-string">"Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiJhc2NoZW4iLCJpYXQiOjE1NDMxMDUzMDQsImV4cCI6MTU0MzEwODkwNH0.WnUCDCwPXRUA1JE_4e7kbkIShQiM0MtW0admTWpKI1g"</span> <span class="hljs-string">"http://localhost:7512/_plugin/geofencing-advertising/geofence/test?lat=-86.99962414458622&amp;lng=31.431421096655942
+</span></code></pre>
+<h3><a id="geofencegeojson_168"></a>geofence/geojson</h3>
+<p>Get the polygons list in GeoJSON format.</p>
+<p>Execute the script <code>action/get-geojson.js</code> to create a <code>polygons.json</code> file containing the polygons.</p>
+<p>Use <a href="https://www.gmapgis.com/">https://www.gmapgis.com/</a> to load the generated file in a world map.</p>
+<h2><a id="Tools_176"></a>Tools</h2>
+<h3><a id="geofenceregister_178"></a>geofence-register</h3>
+<p>This script send a request to register polygons filters.</p>
+<pre><code>Usage: node actions/geofence-register.js &lt;host&gt; &lt;filter count&gt; &lt;bounding box&gt;
+</code></pre>
+<p>The availables bounding boxes are: <code>usa</code></p>
+<p>Example: register 100 000 polygons filters in USA</p>
+<pre><code>node actions/geofence-register.js localhost 100000 usa
+</code></pre>
+<h3><a id="geofencefindmatch_193"></a>geofence-find-match</h3>
+<p>This script return random points that match at least one polygon.</p>
+<p>It also print curl, bombardier and custom node benchmark command for each point.</p>
+<pre><code>Usage: node actions/geofence-find-match.js &lt;host&gt; &lt;bounding box&gt;
+</code></pre>
+<p>The availables bounding boxes are: <code>usa</code></p>
+<p>Example:</p>
+<pre><code>node actions/geofence-find-match.js localhost usa
+</code></pre>
+<h3><a id="getgeojson_211"></a>get-geojson</h3>
+<p>This script get the registered polygons in GeoJSON format.</p>
+<p>The generated file can be viewed online on <a href="https://www.gmapgis.com/">https://www.gmapgis.com/</a>, just drag’n’drop the file.</p>
+<pre><code>Usage: node actions/get-geojson.js &lt;host&gt; &lt;filename&gt;
+</code></pre>
+<p>Example:</p>
+<pre><code>node actions/get-geojson.js localhost ./polygons.json
+</code></pre>
