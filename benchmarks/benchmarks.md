@@ -7,7 +7,7 @@ Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s netwos
 
 ## Benchmark context
 
-Number of 6 faces polygons: 300 000
+Number of 6 vertices polygons: 300 000
 Zone: USA
 Kuzzle authentication: yes
 Document storage: Redis

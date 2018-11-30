@@ -28,7 +28,7 @@ Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network
 
 ### Benchmark context
 
-- Number of 6 faces polygons: `300 000`
+- Number of 6 vertices polygons: `300 000`
 - Overlaping polygons: `true`
 - Accuracy: `<1m`
 - Zone: `USA`
@@ -70,7 +70,7 @@ Server specifications: 8 dedicated CPU cores, 32GB RAM, SSD, 600Mb/s network
 
 ### Benchmark context
 
-- Number of 6 faces polygons: `300 000`
+- Number of 6 vertices polygons: `300 000`
 - Overlaping polygons: `true`
 - Accuracy: `<1m`
 - Zone: `USA`
@@ -103,7 +103,7 @@ Server specifications: 2 vCPU, 8GB RAM
 
 ### Benchmark context
 
-- Number of 6 faces polygons: `300 000`
+- Number of 6 vertices polygons: `300 000`
 - Overlaping polygons: `true`
 - Accuracy: `<1m`
 - Zone: `USA`
