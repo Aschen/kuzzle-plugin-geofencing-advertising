@@ -74,8 +74,10 @@ Server specifications: 9 vCPU, 16 GB RAM
 | 4            | 200              | 11000             | 55                       | 2750                     | 19           | [4 nodes, 200 users in 10 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129162323195/index.html) |
 | 4            | 400              | 15000             | 38                       | 3750                     | 26           | [4 nodes, 400 users in 20 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129163117542/index.html) |
 
+*Number of request per second during 400 concurrent user benchmark*
 ![benchmark 4 node 400 users](images/cluster_4_node_benchmark.png)
 
+*Cluster and Gatling server load during 400 concurrent user benchmark*
 ![cluster load](images/cluster_load.png)
 
 ### Standalone Kuzzle stack on single node with Websocket
