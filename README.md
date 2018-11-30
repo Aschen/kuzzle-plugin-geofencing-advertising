@@ -2,6 +2,22 @@
 
 The purpose of this project is to demonstrate the feasibility and performance of a realtime geofencing advertising backend.
 
+- [Kuzzle Geofencing Advertising](#kuzzle-geofencing-advertising)
+  * [Specifications](#specifications)
+    + [About polygons](#about-polygons)
+  * [Benchmarks](#benchmarks)
+    + [Kuzzle cluster with Websocket](#kuzzle-cluster-with-websocket)
+    + [Kuzzle single node with Websocket](#standalone-kuzzle-stack-on-single-node-with-websocket)
+    + [Kuzzle single node with HTTP](#standalone-kuzzle-stack-on-single-node-with-http)
+  * [Controller Actions](#controller-actions)
+    + [geofence/register](#geofence-register)
+    + [geofence/test](#geofence-test)
+    + [geofence/geojson](#geofence-geojson)
+  * [Tools](#tools)
+    + [geofence-register](#geofence-register)
+    + [geofence-find-match](#geofence-find-match)
+    + [get-geojson](#get-geojson)
+
 ## Specifications
 
 Polygons with 6 sides the size of a few blocks are recorded in a rectangle representing approximately America.
@@ -19,6 +35,44 @@ Requests to the API are authenticated.
 ![polygon size](images/polygon_size.png)
 
 ## Benchmarks
+
+### Kuzzle cluster with Websocket
+
+This benchmark is realised with a Kuzzle cluster on AWS [m5.large instances](https://aws.amazon.com/ec2/instance-types/m5/).
+
+Server specifications: 2 vCPU, 8GB RAM
+
+### Benchmark context
+
+- Number of 6 vertices polygons: `300 000`
+- Overlaping polygons: `true`
+- Accuracy: `<1m`
+- Zone: `USA`
+- Kuzzle authentication: `yes`
+- Document storage: `Redis`
+- Protocol: `Websocket`
+- Node.js: `8.11.0`
+
+The test consists in repeating the same request 2000 times with a point matching 1 polygon.
+
+The benchmark is realized with [Gatling](https://gatling.io) and a [websocket scenario](benchmarks/gatling/Websocket.scala).
+
+Gatling server is a [c5.2xlarge instance](https://aws.amazon.com/ec2/instance-types/c5/).
+
+Server specifications: 9 vCPU, 16 GB RAM
+
+| Kuzzle nodes | Concurrent users | Requests / second | Requests / second / user | Requests / second / node | Latency (ms) | Full benchmark                                                                                                                  |
+|--------------|------------------|-------------------|--------------------------|--------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------|
+| 2            | 20               | 4700              | 235                      | 2350                     | 3            | [2 nodes, 80 users in 40 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129155157651/index.html) |
+| 2            | 120              | 6000              | 50                       | 3000                     | 17           | [2 nodes, 120 users in 12 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129155709939/index.html) |
+| 2            | 200              | 7000              | 35                       | 3500                     | 31           | [2 nodes, 200 users in 20 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129155408633/index.html) |
+| 3            | 120              | 8500              | 71                       | 2833.33                  | 12           | [3 nodes, 120 users in 12 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129160824325/index.html) |
+| 3            | 190              | 9000              | 47                       | 3000                     | 16           | [3 nodes, 200 users in 20 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129160654693/index.html) |
+| 3            | 200              | 10000             | 50                       | 3333.33                  | 21           | [3 nodes, 200 users in 10 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129161004854/index.html) |
+| 4            | 120              | 10000             | 83                       | 2500                     | 8            | [4 nodes, 120 users in 12 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129162052379/index.html) |
+| 4            | 180              | 11000             | 61                       | 2750                     | 11           | [4 nodes, 200 users in 20 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129162203432/index.html) |
+| 4            | 200              | 11000             | 55                       | 2750                     | 19           | [4 nodes, 200 users in 10 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129162323195/index.html) |
+| 4            | 400              | 15000             | 38                       | 3750                     | 26           | [4 nodes, 400 users in 20 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129163117542/index.html) |
 
 ### Standalone Kuzzle stack on single node with Websocket
 
@@ -94,43 +148,6 @@ Server specifications: 4 dedicated CPU cores, 8GB RAM, SSD, 300Mb/s network
 | 5 | 9.17 | 546 |
 | 10 | 15.27 | 654 |
 | 20 | 43.01 | 467 |
-
-### Kuzzle cluster with Websocket
-
-This benchmark is realised with a Kuzzle cluster on AWS [m5.large instances](https://aws.amazon.com/ec2/instance-types/m5/).
-
-Server specifications: 2 vCPU, 8GB RAM
-
-### Benchmark context
-
-- Number of 6 vertices polygons: `300 000`
-- Overlaping polygons: `true`
-- Accuracy: `<1m`
-- Zone: `USA`
-- Kuzzle authentication: `yes`
-- Document storage: `Redis`
-- Protocol: `Websocket`
-- Node.js: `8.11.0`
-
-The test consists in repeating the same request 2000 times with a point matching 1 polygon.
-
-The benchmark is realized with [Gatling](https://gatling.io) and a [websocket scenario](benchmarks/gatling/Websocket.scala).
-
-Gatling server is a [c5.2xlarge instance](https://aws.amazon.com/ec2/instance-types/c5/).
-
-Server specifications: 9 vCPU, 16 GB RAM
-
-The full benchmarks reports are here:
- - [2 nodes, 80 users in 40 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129155157651/index.html)
- - [2 nodes, 120 users in 12 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129155709939/index.html)
- - [2 nodes, 200 users in 20 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129155408633/index.html)
- - [3 nodes, 120 users in 12 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129160824325/index.html)
- - [3 nodes, 200 users in 20 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129160654693/index.html)
- - [3 nodes, 200 users in 10 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129161004854/index.html)
- - [4 nodes, 120 users in 12 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129162052379/index.html)
- - [4 nodes, 200 users in 20 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129162203432/index.html)
- - [4 nodes, 200 users in 10 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129162323195/index.html)
- - [4 nodes, 400 users in 20 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129163117542/index.html)
 
 
 ## Controller Actions
