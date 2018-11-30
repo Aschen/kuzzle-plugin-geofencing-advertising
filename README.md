@@ -59,7 +59,7 @@ The benchmark is realized with [Gatling](https://gatling.io) and a [websocket sc
 
 Gatling server is a [c5.2xlarge instance](https://aws.amazon.com/ec2/instance-types/c5/).
 
-Server specifications: 9 vCPU, 16 GB RAM
+Server specifications: 8 vCPU, 16 GB RAM
 
 | Kuzzle nodes | Concurrent users | Requests / second | Requests / second / user | Requests / second / node | Latency (ms) | Full benchmark                                                                                                                  |
 |--------------|------------------|-------------------|--------------------------|--------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------|
