@@ -61,6 +61,8 @@ Gatling server is a [c5.2xlarge instance](https://aws.amazon.com/ec2/instance-ty
 
 Server specifications: 9 vCPU, 16 GB RAM
 
+![benchmark 4 node 400 users](images/cluster_4_node_benchmark.png)
+
 | Kuzzle nodes | Concurrent users | Requests / second | Requests / second / user | Requests / second / node | Latency (ms) | Full benchmark                                                                                                                  |
 |--------------|------------------|-------------------|--------------------------|--------------------------|--------------|---------------------------------------------------------------------------------------------------------------------------------|
 | 2            | 20               | 4700              | 235                      | 2350                     | 3            | [2 nodes, 80 users in 40 seconds, 2000 requests each](https://aschen.github.io/kuzzle-plugin-geofencing-advertising/benchmarks/gatling/results/websocket-20181129155157651/index.html) |
