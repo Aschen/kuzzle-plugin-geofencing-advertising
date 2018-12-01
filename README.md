@@ -55,7 +55,7 @@ Server specifications: 2 vCPU, 8GB RAM
 
 The test consists in repeating the same request 2000 times with a point matching 1 polygon.
 
-The benchmark is realized with [Gatling](https://gatling.io) and a [websocket scenario](benchmarks/gatling/Websocket.scala).
+The benchmark is realized with [Gatling](https://gatling.io) and a [websocket scenario](benchmarks/gatling/user-files/simulations/Websocket.scala).
 
 Gatling server is a [c5.2xlarge instance](https://aws.amazon.com/ec2/instance-types/c5/).
 
